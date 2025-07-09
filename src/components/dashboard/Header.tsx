@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMobileMenuOpen }) => {
     setShowProfileMenu(false);
   };
 
-  const isAdmin = user?.name === "Phila Simelane" && user?.email === "simelane1@gmail.com";
+  const isAdmin = user?.email === "simelane1@gmail.com";
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">

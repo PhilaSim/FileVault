@@ -36,7 +36,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
       users.push(adminUser);
       localStorage.setItem('users', JSON.stringify(users));
-      console.log('Admin user created:', adminUser);
     }
 
     const savedUser = localStorage.getItem('currentUser');
