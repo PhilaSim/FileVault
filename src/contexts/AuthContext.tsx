@@ -22,16 +22,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     // Initialize admin user if it doesn't exist
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const adminExists = users.find((u: any) => u.email === 'Phila@example');
+    const adminExists = users.find((u: any) => u.email === 'simelane1@gmail.com');
     
     if (!adminExists) {
       const adminUser = {
         id: 'admin-001',
         name: 'Phila Simelane',
-        email: 'Phila@example',
-        password: 'Phila123',
+        email: 'simelane1@gmail.com',
+        password: 'Palesa123',
         joinDate: new Date().toISOString(),
-        profilePicture: `https://api.dicebear.com/7.x/avataaars/svg?seed=Phila@example`
+        profilePicture: `https://api.dicebear.com/7.x/avataaars/svg?seed=simelane1@gmail.com`
       };
       users.push(adminUser);
       localStorage.setItem('users', JSON.stringify(users));
