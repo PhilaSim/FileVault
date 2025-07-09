@@ -35,7 +35,7 @@ const AdminRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     );
   }
 
-  const isAdmin = user?.name === "Phila Simelane" && user?.email === "phila@example.com";
+  const isAdmin = user?.name === "Phila Simelane" && user?.email === "Phila@example";
   
   return user && isAdmin ? <>{children}</> : <Navigate to="/dashboard" replace />;
 };
