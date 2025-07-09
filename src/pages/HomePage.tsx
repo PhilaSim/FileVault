@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Cloud, Shield, Zap, Users, FileText, Download, ArrowRight, CheckCircle } from 'lucide-react';
+import { Cloud, Shield, Zap, Users, FileText, Download, ArrowRight, CheckCircle, BarChart3 } from 'lucide-react';
 import Button from '../components/ui/Button';
 
 const HomePage: React.FC = () => {
