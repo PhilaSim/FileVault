@@ -76,35 +76,20 @@ const AuthPage: React.FC = () => {
               <User className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-3xl font-bold text-white">
-              {isLogin ? 'Welcome Back' : 'Create Account'}
+              Admin Login
             </h2>
             <p className="text-gray-300 mt-2">
-              {isLogin ? 'Sign in to access your files' : 'Join to start storing your files'}
+              Access the administrative dashboard
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {!isLogin && (
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
-                  Full Name
-                </label>
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white placeholder-gray-400"
-                    placeholder="Enter your full name"
-                    required={!isLogin}
-                  />
-                </div>
-              </div>
-            )}
+          <div className="mb-6 p-4 bg-blue-500/20 border border-blue-400/30 rounded-lg">
+            <h4 className="text-white font-medium mb-2">Admin Credentials:</h4>
+            <p className="text-blue-200 text-sm">Email: simelane1@gmail.com</p>
+            <p className="text-blue-200 text-sm">Password: Palesa123</p>
+          </div>
 
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
                 Email Address
@@ -117,8 +102,8 @@ const AuthPage: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white placeholder-gray-400"
-                  placeholder="Enter your email"
+                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-white placeholder-gray-400"
+                  placeholder="Enter admin email"
                   required
                 />
               </div>
@@ -136,8 +121,8 @@ const AuthPage: React.FC = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-white placeholder-gray-400"
-                  placeholder="Enter your password"
+                  className="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-white placeholder-gray-400"
+                  placeholder="Enter admin password"
                   required
                 />
                 <button
@@ -150,38 +135,19 @@ const AuthPage: React.FC = () => {
               </div>
             </div>
 
-            {isLogin && (
-              <div className="text-right">
-                <Link 
-                  to="/forgot-password" 
-                  className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-            )}
-
             <Button
               type="submit"
               variant="primary"
               size="lg"
               isLoading={isLoading}
-              className="w-full bg-cyan-500 hover:bg-cyan-600 transform hover:scale-105 transition-all duration-200"
+              className="w-full bg-red-500 hover:bg-red-600 transform hover:scale-105 transition-all duration-200"
             >
-              {isLogin ? 'Sign In' : 'Create Account'}
+              Access Admin Panel
             </Button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-gray-300">
-              {isLogin ? "Don't have an account?" : 'Already have an account?'}
-              <button
-                onClick={() => setIsLogin(!isLogin)}
-                className="ml-1 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
-              >
-                {isLogin ? 'Sign up' : 'Sign in'}
-              </button>
-            </p>
+          <div className="mt-6 text-center text-gray-400 text-sm">
+            <p>Administrative access only</p>
           </div>
         </div>
       </div>

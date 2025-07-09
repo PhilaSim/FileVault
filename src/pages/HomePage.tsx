@@ -99,33 +99,24 @@ const HomePage: React.FC = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className="animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Store Your Academic Files.
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
-                {" "}Access Them Anytime, Anywhere.
+              Admin File Management System.
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-400">
+                {" "}Complete Administrative Control.
               </span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-              The ultimate cloud storage solution designed specifically for students. 
-              Upload, organize, and access your academic files from any device with enterprise-grade security.
+              Comprehensive administrative dashboard for managing users, files, and system operations. 
+              Monitor, control, and oversee all platform activities with advanced admin tools.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/auth">
                 <Button 
                   variant="primary" 
                   size="lg" 
-                  className="bg-cyan-500 hover:bg-cyan-600 transform hover:scale-105 transition-all duration-200 px-8 py-4 text-lg"
+                  className="bg-red-500 hover:bg-red-600 transform hover:scale-105 transition-all duration-200 px-8 py-4 text-lg"
                 >
-                  Get Started Free
+                  Admin Login
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-              </Link>
-              <Link to="/auth">
-                <Button 
-                  variant="ghost" 
-                  size="lg" 
-                  className="text-white border-2 border-white/30 hover:bg-white/10 px-8 py-4 text-lg"
-                >
-                  Login
                 </Button>
               </Link>
             </div>
@@ -138,14 +129,35 @@ const HomePage: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">
-              Everything You Need for Academic Success
+              Complete Administrative Control
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Powerful features designed to make file management effortless for students
+              Advanced administrative tools for comprehensive system management
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
+            {[
+              {
+                icon: <Users className="w-8 h-8 text-red-500" />,
+                title: "User Management",
+                description: "Complete control over user accounts, permissions, and access levels"
+              },
+              {
+                icon: <Shield className="w-8 h-8 text-red-500" />,
+                title: "System Security",
+                description: "Monitor security, manage access controls, and ensure data protection"
+              },
+              {
+                icon: <FileText className="w-8 h-8 text-red-500" />,
+                title: "File Oversight",
+                description: "Monitor all file uploads, manage storage, and control file access"
+              },
+              {
+                icon: <BarChart3 className="w-8 h-8 text-red-500" />,
+                title: "Analytics Dashboard",
+                description: "Comprehensive insights into system usage and performance metrics"
+              }
+            ].map((feature, index) => (
               <div 
                 key={index}
                 className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
@@ -166,12 +178,28 @@ const HomePage: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">How It Works</h2>
-            <p className="text-xl text-gray-300">Get started in just three simple steps</p>
+            <p className="text-xl text-gray-300">Administrative access in three simple steps</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {steps.map((step, index) => (
+            {[
+              {
+                step: "1",
+                title: "Admin Login",
+                description: "Access the system using your administrative credentials"
+              },
+              {
+                step: "2",
+                title: "Dashboard Access",
+                description: "Navigate through comprehensive admin tools and controls"
+              },
+              {
+                step: "3",
+                title: "System Management",
+                description: "Monitor users, manage files, and oversee all system operations"
+              }
+            ].map((step, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center text-2xl font-bold text-white mx-auto mb-4">
+                <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center text-2xl font-bold text-white mx-auto mb-4">
                   {step.step}
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
@@ -186,27 +214,36 @@ const HomePage: React.FC = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/5 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">What Students Say</h2>
-            <p className="text-xl text-gray-300">Join thousands of students who trust FileVault</p>
+            <h2 className="text-4xl font-bold text-white mb-4">System Features</h2>
+            <p className="text-xl text-gray-300">Comprehensive administrative capabilities</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+            {[
+              {
+                title: "User Analytics",
+                description: "Track user activity, registration trends, and engagement metrics with detailed reporting.",
+                icon: <Users className="w-8 h-8 text-red-400 mb-4" />
+              },
+              {
+                title: "File Management",
+                description: "Complete oversight of all uploaded files with the ability to manage, delete, and organize content.",
+                icon: <FileText className="w-8 h-8 text-red-400 mb-4" />
+              },
+              {
+                title: "System Monitoring",
+                description: "Real-time monitoring of system performance, storage usage, and security status.",
+                icon: <Shield className="w-8 h-8 text-red-400 mb-4" />
+              }
+            ].map((feature, index) => (
               <div 
                 key={index}
                 className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300"
               >
-                <div className="flex items-center mb-4">
-                  <img 
-                    src={testimonial.avatar} 
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full mr-4"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-white">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-300">{testimonial.role}</p>
-                  </div>
+                <div className="text-center">
+                  {feature.icon}
+                  <h4 className="font-semibold text-white text-lg mb-2">{feature.title}</h4>
+                  <p className="text-gray-300">{feature.description}</p>
                 </div>
-                <p className="text-gray-300 italic">"{testimonial.content}"</p>
               </div>
             ))}
           </div>
@@ -217,26 +254,26 @@ const HomePage: React.FC = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Ready to Get Started?
+            Administrative Access
           </h2>
           <p className="text-xl text-gray-300 mb-8">
-            Join thousands of students who are already using FileVault to manage their academic files.
+            Access the comprehensive administrative dashboard to manage users, files, and system operations.
           </p>
           <div className="flex items-center justify-center space-x-4 mb-8">
             <CheckCircle className="w-6 h-6 text-green-400" />
-            <span className="text-white">Free to use</span>
+            <span className="text-white">Full Control</span>
             <CheckCircle className="w-6 h-6 text-green-400" />
-            <span className="text-white">Secure storage</span>
+            <span className="text-white">Secure Access</span>
             <CheckCircle className="w-6 h-6 text-green-400" />
-            <span className="text-white">Easy to use</span>
+            <span className="text-white">Real-time Monitoring</span>
           </div>
           <Link to="/auth">
             <Button 
               variant="primary" 
               size="lg" 
-              className="bg-cyan-500 hover:bg-cyan-600 transform hover:scale-105 transition-all duration-200 px-12 py-4 text-lg"
+              className="bg-red-500 hover:bg-red-600 transform hover:scale-105 transition-all duration-200 px-12 py-4 text-lg"
             >
-              Create Your Account
+              Access Admin Panel
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
@@ -255,10 +292,10 @@ const HomePage: React.FC = () => {
             </div>
             <div className="text-center md:text-right">
               <p className="text-gray-300">
-                © 2024 FileVault. All rights reserved.
+                © 2024 FileVault Admin. All rights reserved.
               </p>
               <p className="text-sm text-gray-400 mt-1">
-                Secure cloud storage for students
+                Administrative Management System
               </p>
             </div>
           </div>

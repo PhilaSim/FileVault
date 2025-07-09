@@ -4,45 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FileVault - Student File Storage</title>
-    <meta name="description" content="Secure cloud storage for students to organize and access their academic files anywhere, anytime." />
+    <title>FileVault Admin - Administrative Dashboard</title>
+    <meta name="description" content="Administrative dashboard for managing users, files, and system operations." />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
-  <script>
-  const ADMIN_EMAIL = "philasimelane@example.com"; // change to your real email
-
-  function checkLogin() {
-    const email = document.getElementById("emailInput").value.trim().toLowerCase();
-    if (email === ADMIN_EMAIL.toLowerCase()) {
-      localStorage.setItem("isAdmin", "true");
-      showAdminSection();
-    } else {
-      localStorage.removeItem("isAdmin");
-      document.getElementById("login-section").style.display = "none";
-      document.getElementById("denied-section").style.display = "block";
-    }
-  }
-
-  function showAdminSection() {
-    document.getElementById("login-section").style.display = "none";
-    document.getElementById("admin-section").style.display = "block";
-    document.getElementById("denied-section").style.display = "none";
-  }
-
-  function logout() {
-    localStorage.removeItem("isAdmin");
-    location.reload();
-  }
-
-  // Auto-show if admin is logged in
-  window.onload = () => {
-    if (localStorage.getItem("isAdmin") === "true") {
-      showAdminSection();
-    }
-  };
-</script>
-
 </html>

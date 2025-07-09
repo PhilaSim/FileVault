@@ -4,25 +4,10 @@ import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
-import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import Settings from './pages/Settings';
 import ForgotPassword from './pages/ForgotPassword';
 import LoadingSpinner from './components/ui/LoadingSpinner';
-
-const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user, isLoading } = useAuth();
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <LoadingSpinner size="lg" />
-      </div>
-    );
-  }
-
-  return user ? <>{children}</> : <Navigate to="/auth" replace />;
-};
 
 const AdminRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, isLoading } = useAuth();
@@ -37,7 +22,7 @@ const AdminRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const isAdmin = user?.email === "simelane1@gmail.com";
   
-  return user && isAdmin ? <>{children}</> : <Navigate to="/dashboard" replace />;
+  return user && isAdmin ? <>{children}</> : <Navigate to="/auth" replace />;
 };
 
 const AppContent: React.FC = () => {
@@ -51,36 +36,30 @@ const AppContent: React.FC = () => {
     );
   }
 
+  const isAdmin = user?.email === "simelane1@gmail.com";
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/auth" element={user ? <Navigate to="/dashboard" replace /> : <AuthPage />} />
+        <Route path="/auth" element={user && isAdmin ? <Navigate to="/admin" replace /> : <AuthPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route 
-          path="/dashboard" 
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          } 
-        />
         <Route 
           path="/settings" 
           element={
-            <ProtectedRoute>
+            <AdminRoute>
               <Settings />
-            </ProtectedRoute>
+            </AdminRoute>
           } 
         />
         <Route 
-          path="/admin" 
+          path="/admin"
           element={
             <AdminRoute>
               <AdminDashboard />
             </AdminRoute>
           } 
         />
+        <Route path="/dashboard" element={<Navigate to="/admin" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

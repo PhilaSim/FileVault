@@ -48,6 +48,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
     
+    // Only allow admin login
+    if (email !== 'simelane1@gmail.com') {
+      setIsLoading(false);
+      return false;
+    }
+    
     // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
@@ -74,37 +80,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const signup = async (name: string, email: string, password: string): Promise<boolean> => {
-    setIsLoading(true);
-    
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    
-    // Check if user already exists
-    if (users.find((u: User) => u.email === email)) {
-      setIsLoading(false);
-      return false;
-    }
-    
-    const newUser = {
-      id: Date.now().toString(),
-      name,
-      email,
-      password,
-      joinDate: new Date().toISOString(),
-      profilePicture: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`
-    };
-    
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-    
-    const { password: _, ...userWithoutPassword } = newUser;
-    setUser(userWithoutPassword);
-    localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-    
+    // Disable signup - admin only system
     setIsLoading(false);
-    return true;
+    return false;
   };
 
   const updateProfile = async (profileData: { name: string; email: string; profilePicture: string }): Promise<void> => {
