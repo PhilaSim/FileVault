@@ -22,19 +22,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     // Initialize admin user if it doesn't exist
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const adminExists = users.find((u: any) => u.email === 'simelane1@gmail.com');
+    const adminEmail = 'simelane1@gmail.com';
+    const adminExists = users.find((u: any) => u.email === adminEmail);
     
     if (!adminExists) {
       const adminUser = {
         id: 'admin-001',
         name: 'Phila Simelane',
-        email: 'simelane1@gmail.com',
+        email: adminEmail,
         password: 'Palesa123',
         joinDate: new Date().toISOString(),
-        profilePicture: `https://api.dicebear.com/7.x/avataaars/svg?seed=simelane1@gmail.com`
+        profilePicture: `https://api.dicebear.com/7.x/avataaars/svg?seed=${adminEmail}`
       };
       users.push(adminUser);
       localStorage.setItem('users', JSON.stringify(users));
+      console.log('Admin user created:', adminUser);
     }
 
     const savedUser = localStorage.getItem('currentUser');
@@ -55,14 +57,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       u.email === email && u.password === password
     );
     
+    console.log('Login attempt:', { email, password });
+    console.log('Found user:', foundUser);
+    
     if (foundUser) {
       const { password: _, ...userWithoutPassword } = foundUser;
       setUser(userWithoutPassword);
       localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
       setIsLoading(false);
+      console.log('Login successful for:', userWithoutPassword);
       return true;
     }
     
+    console.log('Login failed - user not found');
     setIsLoading(false);
     return false;
   };
