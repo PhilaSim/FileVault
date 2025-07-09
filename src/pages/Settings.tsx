@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { User, Lock, Camera, Save } from 'lucide-react';
+import { User, Lock, Camera, Save, Shield, Users, FileText, BarChart3 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/dashboard/Header';
 import Button from '../components/ui/Button';
@@ -19,6 +20,8 @@ const Settings: React.FC = () => {
     confirmPassword: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+
+  const isAdmin = user?.email === "simelane1@gmail.com";
 
   const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -229,6 +232,126 @@ const Settings: React.FC = () => {
     </div>
   );
 
+  const renderAdminPanel = () => (
+    <div className="bg-white rounded-lg shadow p-6">
+      <div className="flex items-center mb-6">
+        <div className="p-3 bg-red-100 rounded-full mr-4">
+          <Shield className="w-6 h-6 text-red-600" />
+        </div>
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900">Admin Panel</h3>
+          <p className="text-sm text-gray-600">Administrative tools and system management</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Quick Stats */}
+        <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-lg p-4 border border-red-200">
+          <h4 className="font-medium text-gray-900 mb-3">System Overview</h4>
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Total Users:</span>
+              <span className="font-medium">{JSON.parse(localStorage.getItem('users') || '[]').length}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Total Files:</span>
+              <span className="font-medium">{JSON.parse(localStorage.getItem('files') || '[]').length}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Admin Status:</span>
+              <span className="font-medium text-red-600">Active</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="space-y-3">
+          <h4 className="font-medium text-gray-900">Quick Actions</h4>
+          <Link to="/admin">
+            <Button 
+              variant="primary" 
+              className="w-full bg-red-500 hover:bg-red-600 flex items-center justify-center"
+            >
+              <Shield className="w-4 h-4 mr-2" />
+              Open Admin Dashboard
+            </Button>
+          </Link>
+          <div className="grid grid-cols-2 gap-2">
+            <Link to="/admin">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="w-full text-gray-600 hover:bg-gray-100 flex items-center justify-center"
+                onClick={() => {
+                  // This will navigate to admin with users tab
+                  setTimeout(() => {
+                    const event = new CustomEvent('admin-tab-change', { detail: 'users' });
+                    window.dispatchEvent(event);
+                  }, 100);
+                }}
+              >
+                <Users className="w-4 h-4 mr-1" />
+                Users
+              </Button>
+            </Link>
+            <Link to="/admin">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="w-full text-gray-600 hover:bg-gray-100 flex items-center justify-center"
+                onClick={() => {
+                  // This will navigate to admin with files tab
+                  setTimeout(() => {
+                    const event = new CustomEvent('admin-tab-change', { detail: 'files' });
+                    window.dispatchEvent(event);
+                  }, 100);
+                }}
+              >
+                <FileText className="w-4 h-4 mr-1" />
+                Files
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Admin Features */}
+      <div className="mt-6 pt-6 border-t border-gray-200">
+        <h4 className="font-medium text-gray-900 mb-4">Administrative Features</h4>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="text-center p-4 bg-gray-50 rounded-lg">
+            <Users className="w-8 h-8 text-blue-500 mx-auto mb-2" />
+            <h5 className="font-medium text-gray-900">User Management</h5>
+            <p className="text-xs text-gray-600 mt-1">View and manage all user accounts</p>
+          </div>
+          <div className="text-center p-4 bg-gray-50 rounded-lg">
+            <FileText className="w-8 h-8 text-green-500 mx-auto mb-2" />
+            <h5 className="font-medium text-gray-900">File Oversight</h5>
+            <p className="text-xs text-gray-600 mt-1">Monitor and manage all uploaded files</p>
+          </div>
+          <div className="text-center p-4 bg-gray-50 rounded-lg">
+            <BarChart3 className="w-8 h-8 text-purple-500 mx-auto mb-2" />
+            <h5 className="font-medium text-gray-900">System Analytics</h5>
+            <p className="text-xs text-gray-600 mt-1">View usage statistics and insights</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Warning Notice */}
+      <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+        <div className="flex items-start">
+          <Shield className="w-5 h-5 text-yellow-600 mt-0.5 mr-3 flex-shrink-0" />
+          <div>
+            <h5 className="font-medium text-yellow-800">Administrator Access</h5>
+            <p className="text-sm text-yellow-700 mt-1">
+              You have administrative privileges. Use these tools responsibly and ensure user privacy is maintained.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header 
@@ -248,7 +371,8 @@ const Settings: React.FC = () => {
             <nav className="-mb-px flex space-x-8">
               {[
                 { id: 'profile', name: 'Profile', icon: User },
-                { id: 'password', name: 'Password', icon: Lock }
+                { id: 'password', name: 'Password', icon: Lock },
+                ...(isAdmin ? [{ id: 'admin', name: 'Admin Panel', icon: Shield }] : [])
               ].map((tab) => {
                 const Icon = tab.icon;
                 return (
@@ -257,7 +381,7 @@ const Settings: React.FC = () => {
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center py-2 px-1 border-b-2 font-medium text-sm ${
                       activeTab === tab.id
-                        ? 'border-cyan-500 text-cyan-600'
+                        ? (tab.id === 'admin' ? 'border-red-500 text-red-600' : 'border-cyan-500 text-cyan-600')
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
@@ -273,6 +397,7 @@ const Settings: React.FC = () => {
         {/* Settings Content */}
         {activeTab === 'profile' && renderProfileSettings()}
         {activeTab === 'password' && renderPasswordSettings()}
+        {activeTab === 'admin' && isAdmin && renderAdminPanel()}
       </div>
     </div>
   );

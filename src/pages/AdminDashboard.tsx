@@ -17,6 +17,17 @@ const AdminDashboard: React.FC = () => {
 
   useEffect(() => {
     loadData();
+    
+    // Listen for tab change events from settings page
+    const handleTabChange = (event: CustomEvent) => {
+      setActiveTab(event.detail);
+    };
+    
+    window.addEventListener('admin-tab-change', handleTabChange as EventListener);
+    
+    return () => {
+      window.removeEventListener('admin-tab-change', handleTabChange as EventListener);
+    };
   }, []);
 
   const loadData = () => {
