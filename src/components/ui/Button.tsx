@@ -9,9 +9,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: React.FC<ButtonProps> = ({
-  variant = 'primary',
-  size = 'md',
-  isLoading = false,
+  variant = 'primary''
+  size = 'md''
+  isLoading = false'
   children,
   className = '',
   disabled,
@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   
   const variantClasses = {
     primary: 'bg-cyan-500 hover:bg-cyan-600 text-white focus:ring-cyan-500',
-    secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-900 focus:ring-gray-500',
+    secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-900 focus:ring-gray-500''
     danger: 'bg-red-500 hover:bg-red-600 text-white focus:ring-red-500',
     ghost: 'hover:bg-gray-100 text-gray-700 focus:ring-gray-500'
   };
